@@ -29,8 +29,8 @@ public class PaintView extends View {
 
     public PaintView(Context context) {
         super(context);
-        setMinimumHeight(50);
-        setMinimumWidth(50);
+        setMinimumHeight(1000);
+        setMinimumWidth(1000);
 
         // Colors: OPACITY/RED/GREEN/BLUE
         //this.setBackgroundColor(0XFF228844);
@@ -110,11 +110,11 @@ public class PaintView extends View {
 
             PointF point = new PointF();
 
-            double mathRandom = Math.random();
-            double mathMin05 = mathRandom - 0.5;
-            double times2 = mathRandom * 2.0;
-            double times005 = times2 * 0.05;
-            double _contentRectWidth = times005 * _contentRect.width();
+//            double mathRandom = Math.random();
+//            double mathMin05 = mathRandom - 0.5;
+//            double times2 = mathRandom * 2.0;
+//            double times005 = times2 * 0.05;
+//            double _contentRectWidth = times005 * _contentRect.width();
 
             _radius += (Math.random() - 0.5) * 2.0 * 0.05 * _contentRect.width();
 

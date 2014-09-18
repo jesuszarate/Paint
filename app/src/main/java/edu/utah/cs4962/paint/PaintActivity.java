@@ -14,38 +14,41 @@ import android.widget.LinearLayout;
 
 public class PaintActivity extends Activity {
 
-    PaintView _paintView;
+    //PaintView _paintView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        LinearLayout rootLayout = new LinearLayout(this);
-        rootLayout.setOrientation(LinearLayout.VERTICAL);
+        PaletteView rootLayout = new PaletteView(this);
+        //rootLayout.setOrientation(LinearLayout.VERTICAL);
 
-        _paintView = new PaintView(this);
-        _paintView.setBackgroundColor(Color.YELLOW);
-        _paintView.setPadding(5, 5, 5, 5);
-        _paintView.setColor(Color.DKGRAY);
-        rootLayout.addView(_paintView, new LinearLayout.LayoutParams(500, ViewGroup.LayoutParams.WRAP_CONTENT));
+        for (int splotchIndex = 0; splotchIndex < 10; splotchIndex++) {
+            PaintView paintView = new PaintView(this);
+            paintView.setBackgroundColor(Color.YELLOW);
+            //_paintView.setPadding(5, 5, 5, 5);
+            paintView.setColor(Color.DKGRAY);
+            rootLayout.addView(paintView, new LinearLayout.LayoutParams(100, ViewGroup.LayoutParams.WRAP_CONTENT));
 
+            paintView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ((PaintView)v).setColor(Color.RED);
+                }
+            });
+
+            // _paintView.setOnSplotchTouchListener() -> Just a method.
+            // new View.OnSplotchTouchListener() -> Interface definition.
+            // The rest -> an anonymous class definition. (An anonymous inner class of activity)
+            paintView.setOnSplotchTouchListener(new PaintView.OnSplotchTouchListener() {
+                @Override
+                public void onSplotchTouched(PaintView v) {
+                    ((PaintView)v).setColor(Color.DKGRAY);
+                }
+            });
+        }
         setContentView(rootLayout);
 
-        _paintView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                _paintView.setColor(Color.RED);
-            }
-        });
 
-        // _paintView.setOnSplotchTouchListener() -> Just a method.
-        // new View.OnSplotchTouchListener() -> Interface definition.
-        // The rest -> an anonymous class definition. (An anonymous inner class of activity)
-        _paintView.setOnSplotchTouchListener(new PaintView.OnSplotchTouchListener() {
-            @Override
-            public void onSplotchTouched(PaintView view) {
-                _paintView.setColor(Color.DKGRAY);
-            }
-        });
     }
 }
